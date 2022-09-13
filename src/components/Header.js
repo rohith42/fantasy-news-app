@@ -7,7 +7,7 @@ function Header () {
     return (
         <Navbar bg="dark" variant='dark'>
             <Container>
-                <Navbar.Brand>Fantasy Football News Applet</Navbar.Brand>
+                <Navbar.Brand>Fantasy Football News</Navbar.Brand>
                 <Navbar.Text>
                     <Profile />
                 </Navbar.Text>
