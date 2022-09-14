@@ -7,7 +7,12 @@ export function RosterProvider({ children }) {
     const [selected, setSelected] = useState("");
     
     function addToRoster(newMember) {
-        setRoster((prevRoster) => [...prevRoster, newMember]);
+        console.log(newMember);
+        // setRoster((prevRoster) => [...prevRoster, newMember]);
+        setRoster((prevRoster) => {
+            console.log([...prevRoster, newMember]);
+            return [...prevRoster, newMember];
+        });
     }
 
     function deleteFromRoster(toDelete) {
@@ -19,7 +24,9 @@ export function RosterProvider({ children }) {
     }
     
     return (
-        <RosterContext.Provider value={{ selected, roster }} >
+        <RosterContext.Provider 
+            value={{ selected, roster, addToRoster, deleteFromRoster, updateSelected }} 
+        >
             {children}
         </RosterContext.Provider>
     );
