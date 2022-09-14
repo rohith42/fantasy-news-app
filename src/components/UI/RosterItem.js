@@ -15,7 +15,6 @@ function RosterItem ({ name }) {
     }, [selected, name]);
 
     function handleClick() {
-        console.log(`${name} was clicked!`);
         updateSelected(name);
     }
 

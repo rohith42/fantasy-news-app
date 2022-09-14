@@ -15,7 +15,6 @@ export function RosterProvider({ children }) {
     }
 
     function updateSelected(newSelection) {
-        console.log(`Updating selected to ${newSelection}...`);
         setSelected(newSelection);
     }
     

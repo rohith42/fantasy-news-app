@@ -6,10 +6,7 @@ import Players from './components/Players';
 import News from './components/News';
 import { RosterProvider } from './store/roster-context';
 
-
 function App() {
-  
-
   return (
     <div className="App">
       <RosterProvider>
