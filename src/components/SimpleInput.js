@@ -14,8 +14,10 @@ function SimpleInput() {
     }
 
     function addPlayer() {
-        addToRoster(enteredText.toLowerCase());
-        setEnteredText("");
+        if (enteredText.trim()) {
+            addToRoster(enteredText.trim().toLowerCase());
+            setEnteredText("");
+        }
     }
   
     return (

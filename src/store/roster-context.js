@@ -7,12 +7,7 @@ export function RosterProvider({ children }) {
     const [selected, setSelected] = useState("");
     
     function addToRoster(newMember) {
-        console.log(newMember);
-        // setRoster((prevRoster) => [...prevRoster, newMember]);
-        setRoster((prevRoster) => {
-            console.log([...prevRoster, newMember]);
-            return [...prevRoster, newMember];
-        });
+        setRoster((prevRoster) => [...prevRoster, newMember]);
     }
 
     function deleteFromRoster(toDelete) {
@@ -20,6 +15,7 @@ export function RosterProvider({ children }) {
     }
 
     function updateSelected(newSelection) {
+        console.log(`Updating selected to ${newSelection}...`);
         setSelected(newSelection);
     }
     
