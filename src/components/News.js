@@ -15,6 +15,7 @@ function News ({ selected }) {
         if (selected) {
             updateNews();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected])
 
     if (selected) {
