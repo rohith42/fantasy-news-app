@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import RosterContext from "../store/roster-context";
 import { fetchNews } from "../util/https";
 import ArticleCard from "./UI/ArticleCard";
 
-function News ({ selected }) {
-    let output = "Select a player or team from the left to get started";
+function News () {
     const [articles, setArticles] = useState([])
+    const { selected } = useContext(RosterContext);
 
     async function updateNews() {
         const articlesLocal = await fetchNews(selected);
@@ -18,6 +19,7 @@ function News ({ selected }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected])
 
+    let output = "Select a player or team from the left to get started";
     if (selected) {
         output = `There are ${articles.length} recent articles about ${selected.toUpperCase()}`;
     }
