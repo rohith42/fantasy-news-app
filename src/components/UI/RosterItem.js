@@ -4,7 +4,7 @@ import RosterContext from "../../store/roster-context";
 
 function RosterItem ({ name }) {
     const [active, setActive] = useState(false);
-    const { selected, updateSelected } = useContext(RosterContext);
+    const { selected, updateSelected, deleteFromRoster } = useContext(RosterContext);
 
     useEffect(() => {
         if (selected === name) {
@@ -18,8 +18,12 @@ function RosterItem ({ name }) {
         updateSelected(name);
     }
 
+    function handleDoubleClick() {
+        deleteFromRoster(name);
+    }
+
     return (
-        <ListGroup.Item active={active} action onClick={handleClick} className='roster-item' >
+        <ListGroup.Item active={active} action onClick={handleClick} onDoubleClick={handleDoubleClick} >
             {name.toUpperCase()}
         </ListGroup.Item>
     );

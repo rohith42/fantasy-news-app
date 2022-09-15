@@ -15,6 +15,8 @@ function News () {
     useEffect(() => {
         if (selected) {
             updateNews();
+        } else {
+            setArticles([]);
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected])

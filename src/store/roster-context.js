@@ -12,6 +12,7 @@ export function RosterProvider({ children }) {
 
     function deleteFromRoster(toDelete) {
         setRoster((prevRoster) => prevRoster.filter(player => player !== toDelete));
+        setSelected("");
     }
 
     function updateSelected(newSelection) {
