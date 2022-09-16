@@ -5,6 +5,7 @@ const RosterContext = createContext();
 export function RosterProvider({ children }) {
     const [roster, setRoster] = useState([]);
     const [selected, setSelected] = useState("");
+    const [uid, setUID] = useState("");
     
     function addToRoster(newMember) {
         setRoster((prevRoster) => [...prevRoster, newMember]);
@@ -21,7 +22,9 @@ export function RosterProvider({ children }) {
     
     return (
         <RosterContext.Provider 
-            value={{ selected, roster, addToRoster, deleteFromRoster, updateSelected }} 
+            value={{ selected, roster, uid,
+                addToRoster, deleteFromRoster, updateSelected, setUID 
+            }} 
         >
             {children}
         </RosterContext.Provider>

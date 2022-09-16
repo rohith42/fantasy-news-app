@@ -8,6 +8,15 @@
   color: white;
 }
 
+.logout {
+  display: flex;
+  flex-direction: row;
+}
+
+.login-text {
+  margin-right: 10px;
+}
+
 .footer {
   text-align: center;
 }
