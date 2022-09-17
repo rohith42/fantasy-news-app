@@ -1,20 +1,35 @@
 import { useContext, useState } from 'react';
 import RosterContext from '../store/roster-context';
 import Button from 'react-bootstrap/Button';
-import { auth, provider } from '../firebase-config';
+import { auth, provider, db } from '../firebase-config';
 import { signInWithPopup, signOut } from 'firebase/auth';
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 function Login() {
-    const { uid, setUID, downloadRoster } = useContext(RosterContext);
+    const { uid, roster, setUID, setRoster } = useContext(RosterContext);
     const [email, setEmail] = useState("");
 
     function signIn() {
         signInWithPopup(auth, provider).then((result) => {
+            const userid = result.user.uid;
             setEmail(result.user.email);
-            setUID(result.user.uid);
+            setUID(userid);
             localStorage.setItem("isAuth", true);
-            downloadRoster(result.user.uid);
+            const docRef = doc(db, "users", userid);
+            getDoc(docRef).then((docSS) => {
+                if (docSS.exists()) {
+                    // User already exists in the db -> fetch their roster
+                    const rosterData = docSS.data();
+                    setRoster(rosterData.roster);
+                } else {
+                    // New user -> upload existing roster to db
+                    console.log("Welcome new user! Storing your roster in the db...");
+                    setDoc(docRef, { roster }).then(() => {
+                        console.log(`Stored your roster in firestore under ${userid}`);
+                    });
+                }
+            });
         });
     }
 
