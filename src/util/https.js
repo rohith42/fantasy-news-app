@@ -1,6 +1,6 @@
 import axios from "axios"
+import { NEWSAPI_KEY } from "../api-keys";
 
-const NEWSAPI_KEY = "fef236e5a5b848bc8da3d7cded53e5e7";
 
 // @param searchTerm - string, fetches news with that searchTerm
 export async function fetchNews(searchTerm) {
