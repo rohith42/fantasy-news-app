@@ -7,7 +7,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 
 function Login() {
-    const { uid, roster, setUID, setRoster } = useContext(RosterContext);
+    const { uid, roster, setUID, setRoster, setSelected } = useContext(RosterContext);
     const [email, setEmail] = useState(""); // Just to display to user who's logged in
 
     function signIn() {
@@ -38,6 +38,8 @@ function Login() {
         signOut(auth).then(() => {
             setUID("");
             setEmail("");
+            setSelected("");
+            setRoster([]);
             localStorage.setItem("isAuth", false);
         });
     }
