@@ -3,6 +3,7 @@ import { NEWSAPI_KEY } from "../api-keys";
 
 
 // @param searchTerm - string, fetches news with that searchTerm
+// @returns array of article objs with the schema outlined below:
 export async function fetchNews(searchTerm) {
     const baseurl = "https://newsapi.org/v2/top-headlines?";
     const url = `${baseurl}q=${searchTerm}&apiKey=${NEWSAPI_KEY}`;

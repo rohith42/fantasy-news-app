@@ -8,6 +8,7 @@ import RosterItem from "./UI/RosterItem";
 function Roster () {
     const { roster } = useContext(RosterContext);
 
+    // Default output if nothing in roster
     if (roster.length === 0) {
         return (<p>Add a player or a team to get started</p>);
     }

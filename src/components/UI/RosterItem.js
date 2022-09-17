@@ -3,6 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import RosterContext from "../../store/roster-context";
 
 function RosterItem ({ name }) {
+    // active state is passed as prop to ListGroup.Item to highlight it in styles
     const [active, setActive] = useState(false);
     const { selected, setSelected, deleteFromRoster } = useContext(RosterContext);
 

@@ -8,26 +8,27 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 function Login() {
     const { uid, roster, setUID, setRoster } = useContext(RosterContext);
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(""); // Just to display to user who's logged in
 
     function signIn() {
         signInWithPopup(auth, provider).then((result) => {
             const userid = result.user.uid;
             setEmail(result.user.email);
             setUID(userid);
-            localStorage.setItem("isAuth", true);
+            localStorage.setItem("isAuth", true); // Local storage caches auth status
+            
+            // Creates a ref to the doc in firestore db
+            // Document names are the uid's of the user
             const docRef = doc(db, "users", userid);
             getDoc(docRef).then((docSS) => {
+                // docSS == documentSnapshot
                 if (docSS.exists()) {
                     // User already exists in the db -> fetch their roster
                     const rosterData = docSS.data();
                     setRoster(rosterData.roster);
                 } else {
                     // New user -> upload existing roster to db
-                    console.log("Welcome new user! Storing your roster in the db...");
-                    setDoc(docRef, { roster }).then(() => {
-                        console.log(`Stored your roster in firestore under ${userid}`);
-                    });
+                    setDoc(docRef, { roster });
                 }
             });
         });
@@ -35,13 +36,13 @@ function Login() {
 
     function logout() {
         signOut(auth).then(() => {
-            console.log(`Logged out ${uid}...`);
             setUID("");
             setEmail("");
             localStorage.setItem("isAuth", false);
         });
     }
 
+    // if signed-in
     if (uid) {
         return (
             <div className='logout' >
@@ -53,6 +54,7 @@ function Login() {
         );
     }
     
+    // if not signed in
     return (
         <Button onClick={signIn} >Sign in with Google</Button>
     );

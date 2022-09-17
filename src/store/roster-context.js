@@ -5,13 +5,14 @@ import { db } from '../firebase-config';
 const RosterContext = createContext();
 
 export function RosterProvider({ children }) {
-    const [roster, setRoster] = useState([]);
-    const [selected, setSelected] = useState("");
-    const [uid, setUID] = useState("");
+    const [roster, setRoster] = useState([]);     // roster of players/teams
+    const [selected, setSelected] = useState(""); // selected player/team
+    const [uid, setUID] = useState("");           // UID of the user
     
     function addToRoster(newMember) {
         setRoster((prevRoster) => {
             const newRoster = [...prevRoster, newMember];
+            // if user's signed in, updates firestore with new roster
             if (uid) {
                 const docRef = doc(db, 'users', uid);
                 setDoc(docRef, { roster: newRoster });
@@ -23,6 +24,7 @@ export function RosterProvider({ children }) {
     function deleteFromRoster(toDelete) {
         setRoster((prevRoster) => {
             const newRoster = prevRoster.filter(player => player !== toDelete);
+            // if user's signed in, updates firestore with new roster
             if (uid) {
                 const docRef = doc(db, 'users', uid);
                 setDoc(docRef, { roster: newRoster });

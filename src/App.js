@@ -1,10 +1,10 @@
 import './App.css';
-import Footer from './components/Footer';
-import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { RosterProvider } from './store/roster-context';
+import Header from './components/Header';
 import Players from './components/Players';
 import News from './components/News';
-import { RosterProvider } from './store/roster-context';
+import Footer from './components/Footer';
 
 function App() {
   return (
