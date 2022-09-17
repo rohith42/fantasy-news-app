@@ -6,7 +6,7 @@ import { signInWithPopup, signOut } from 'firebase/auth';
 
 
 function Login() {
-    const { uid, setUID } = useContext(RosterContext);
+    const { uid, setUID, downloadRoster } = useContext(RosterContext);
     const [email, setEmail] = useState("");
 
     function signIn() {
@@ -14,6 +14,7 @@ function Login() {
             setEmail(result.user.email);
             setUID(result.user.uid);
             localStorage.setItem("isAuth", true);
+            downloadRoster(result.user.uid);
         });
     }
 
