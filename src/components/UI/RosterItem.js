@@ -4,7 +4,7 @@ import RosterContext from "../../store/roster-context";
 
 function RosterItem ({ name }) {
     const [active, setActive] = useState(false);
-    const { selected, updateSelected, deleteFromRoster } = useContext(RosterContext);
+    const { selected, setSelected, deleteFromRoster } = useContext(RosterContext);
 
     useEffect(() => {
         if (selected === name) {
@@ -15,7 +15,7 @@ function RosterItem ({ name }) {
     }, [selected, name]);
 
     function handleClick() {
-        updateSelected(name);
+        setSelected(name);
     }
 
     function handleDoubleClick() {

@@ -12,10 +12,10 @@ export function RosterProvider({ children }) {
     function addToRoster(newMember) {
         setRoster((prevRoster) => {
             const newRoster = [...prevRoster, newMember];
-            const docRef = doc(db, 'users', uid);
-            setDoc(docRef, { roster: newRoster }).then(() => {
-                console.log(`Updated roster under ${uid}`);
-            });
+            if (uid) {
+                const docRef = doc(db, 'users', uid);
+                setDoc(docRef, { roster: newRoster });
+            }
             return newRoster;
         });
     }
@@ -23,23 +23,19 @@ export function RosterProvider({ children }) {
     function deleteFromRoster(toDelete) {
         setRoster((prevRoster) => {
             const newRoster = prevRoster.filter(player => player !== toDelete);
-            const docRef = doc(db, 'users', uid);
-            setDoc(docRef, { roster: newRoster }).then(() => {
-                console.log(`Updated roster under ${uid}`);
-            });
+            if (uid) {
+                const docRef = doc(db, 'users', uid);
+                setDoc(docRef, { roster: newRoster });
+            }
             return newRoster;
         });
         setSelected("");
     }
-
-    function updateSelected(newSelection) {
-        setSelected(newSelection);
-    }
     
     return (
         <RosterContext.Provider 
-            value={{ selected, roster, uid,
-                updateSelected, setUID, addToRoster, deleteFromRoster, setRoster 
+            value={{ selected, uid, roster,
+                setSelected, setUID, addToRoster, deleteFromRoster, setRoster 
             }} 
         >
             {children}
